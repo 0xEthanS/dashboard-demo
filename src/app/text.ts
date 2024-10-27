@@ -166,3 +166,6 @@ I noted earlier we reported a modest tax benefit this quarter. The tax credits f
 For the full year, our tax rate was a little more than 6%. And excluding the impacts of BSBY cessation and FDIC and the other discrete tax benefits, that rate was 10%. And further excluding our investment tax credits, our tax rate would have been 25%.
 
 `
+
+
+

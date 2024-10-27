@@ -2,7 +2,6 @@
 
 import { useState } from "react"
 import { useJsonStream } from "stream-hooks"
-
 import { Overview } from "@/components/overview"
 import { Button } from "@/components/ui/button"
 import { 
@@ -12,12 +11,12 @@ import {
 	CardTitle 
 } from "@/components/ui/card"
 import { Textarea } from "@/components/ui/textarea"
+import { dashboardSchema } from "@/app/schemas/dashboard"
+import { treasury } from "@/app/text"
 
-import { dashboardSchema } from "./schemas/dashboard"
 
 
-// IMPORTANT This is the text import for generation
-import { treasury } from "./text"
+
 
 
 
@@ -26,7 +25,11 @@ export function Dashboard() {
 
 
 	const [submitted, setSubmitted] = useState(false)
+
 	const [prompt, setPrompt] = useState(treasury)
+
+	const [openAIAPIKey, setOpenAIAPIKey] = useState('')
+
 
 
 
@@ -55,7 +58,8 @@ export function Dashboard() {
 							content: prompt,
 							role: "user"
 						}
-					]
+					],
+					APIKey: openAIAPIKey
 				}
 			})
 		} catch (e) {
@@ -63,12 +67,19 @@ export function Dashboard() {
 		}
 	}
 
-	const handleChange = (e) => {
+
+
+
+	const handlePromptChange = (e) => {
 		setPrompt(e.target.value)
 	}
 
-	//console.log(prompt)
 
+
+
+	const handleOpenAIAPIKeyChange = (e) => {
+		setOpenAIAPIKey(e.target.value)
+	}
 
 
 
@@ -81,7 +92,16 @@ export function Dashboard() {
 				<Textarea 
 					className="mb-12 min-h-[50vh] w-full" 
 					value={prompt} 
-					onChange={handleChange}
+					onChange={handlePromptChange}
+				/>
+				<h1 className="mb-2">
+					OpenAI API Key:
+				</h1>
+				<Textarea 
+					className="mb-12 w-full" 
+					placeholder="OpenAI API Key"
+					value={openAIAPIKey} 
+					onChange={handleOpenAIAPIKeyChange}
 				/>
 				<Button 
 					onClick={submitMessage}
